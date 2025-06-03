@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.github.mitsumi.solutions</groupId>
+    <groupId>io.github.mitsumi-solutions-develop</groupId>
     <artifactId>spring-json</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
@@ -27,10 +27,15 @@
         <junit.jupiter.version>5.12.2</junit.jupiter.version>
         <assertj.version>4.0.0-M1</assertj.version>
         <hamcrest.version>3.0</hamcrest.version>
-        <!-- 認証情報読み込み -->
-        <github.global.server>github</github.global.server>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>ossrh</id>
+            <name>Central Repository OSSRH</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-json -->
         <dependency>
