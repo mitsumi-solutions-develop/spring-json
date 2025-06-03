@@ -8,7 +8,25 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
     <name>spring-json</name>
+    <description>spring json</description>
     <url>https://github.com/mitsumi-solutions-develop/spring-json</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>mitsumi.kaneyama</name>
+            <email>github@mitsumi-solutions.co.jp</email>
+            <organization>Mitsumi Solutions</organization>
+            <organizationUrl>https://www.mitsumi-solutions.co.jp</organizationUrl>
+        </developer>
+    </developers>
+
     <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -17,6 +35,11 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
+    <scm>
+        <connection>scm:git:git://github.com/mitsumi-solutions-develop/spring-json.git</connection>
+        <developerConnection>scm:git:ssh://github.com:mitsumi-solutions-develop/spring-json.git</developerConnection>
+        <url>https://github.com/mitsumi-solutions-develop/spring-json/tree/master</url>
+    </scm>
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
@@ -109,6 +132,15 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.7.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                </configuration>
             </plugin>
         </plugins>
     </build>
