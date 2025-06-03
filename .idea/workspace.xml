@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b2a11feb-1c60-41f0-8dc6-42476b01855f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,6 +35,8 @@
   "keyToString": {
     "JUnit.JsonTest (1).executor": "Debug",
     "JUnit.JsonTest.executor": "Debug",
+    "Maven.spring-json [compile].executor": "Run",
+    "Maven.spring-json [package].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -105,7 +108,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1748864870502</updated>
-      <workItem from="1748864873330" duration="3350000" />
+      <workItem from="1748864873330" duration="4926000" />
     </task>
     <servers />
   </component>
