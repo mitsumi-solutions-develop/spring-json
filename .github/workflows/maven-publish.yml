@@ -27,14 +27,23 @@ jobs:
         server-id: central
         server-username: MAVEN_USERNAME
         server-password: MAVEN_PASSWORD
+    - id: install-secret-key
+      name: Install gpg secret key
+      run: |
+        # Install gpg secret key
+        cat <(echo -e "mI0EaD/EPwEEAOnyqUHifqmt9s4sJMPyaIpMM/hikiQkF0LJ8FGjP3FsQNZHV//9CYqlZFJgDPT7nHmAWswhxK1suRZXGFIT/wLNksYs6KpptD5fYJJ59iivF3fEgP66xYOQiFSadu5xA2AFD9rQpEJu8H7Vdn59ahojrTX0pgt2LudKlIN9q/DxABEBAAG0RW1pdHN1bWkgc29sdXRpb25zIChwdWJsaXNoaW5nIG1hdmVuKSA8Z2l0aHViQG1pdHN1bWktc29sdXRpb25zLmNvLmpwPojRBBMBCAA7FiEEBOlMfqvkiEEfmwi2ZE+u3bkHv6kFAmg/xD8CGwMFCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4AACgkQZE+u3bkHv6krEQQAvx1yM0y9c8fbi3E+hSzKQCVU8/4qSYQBFOkXGV4hhpwSyO1AD3VOT3G6G6ZR96jVkVai7KRuVb2B92zaEwFlgBOiQnYUQKRwb9PKeRxJEVG11m0i17wujWmFrpWz3p9meDX85C0iJnff1saWuFUH8g83NzWZ0IqkCU1X3a+GL6G4jQRoP8Q/AQQAvRuSsgU+O+q073MUjZw5ci+nf/15VniBXhUTiVpyDj+zqz6Ck1NRTMYTWvqpuKT0riVWLNMT7yy1v/axJgckvW7WgfhaFKoQ9WYS2xs/mkoNhLmB8ihzetAeahJez/swjshJh8aHUFCGKHcv8qiJ77GU14qbr1Uuno8X2cLa1jUAEQEAAYi2BBgBCAAgFiEEBOlMfqvkiEEfmwi2ZE+u3bkHv6kFAmg/xD8CGwwACgkQZE+u3bkHv6k9LwP/aarY+nFFLsYJXzXLFmEvzQ8d/HhAfWfr95BDszXFUxBmYhGepCGwIpuR7IGkXTS2ydeQI4ICy00cfLR1UPSpGWDIs7x+fVO7JtDc9Rkej1gr4uocm7sBtypHFybpQeLeL+Wf86Yz2WnC7MALIdJok5jquLYsVVg1ElRu5AnFV9Y==qurY") | gpg --batch --import
+        # Verify gpg secret key
+        gpg --list-secret-keys --keyid-format LONG
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
     - name: Publish to GitHub Packages Apache Maven
-      run: mvn --batch-mode deploy
+      run: |
+        mvn \
+          --no-transfer-progress \
+          --batch-mode \
+          -Dgpg.passphrase=mitsumi0226 \
+          clean deploy
       env:
-        SIGN_KEY: mI0EaD/EPwEEAOnyqUHifqmt9s4sJMPyaIpMM/hikiQkF0LJ8FGjP3FsQNZHV//9CYqlZFJgDPT7nHmAWswhxK1suRZXGFIT/wLNksYs6KpptD5fYJJ59iivF3fEgP66xYOQiFSadu5xA2AFD9rQpEJu8H7Vdn59ahojrTX0pgt2LudKlIN9q/DxABEBAAG0RW1pdHN1bWkgc29sdXRpb25zIChwdWJsaXNoaW5nIG1hdmVuKSA8Z2l0aHViQG1pdHN1bWktc29sdXRpb25zLmNvLmpwPojRBBMBCAA7FiEEBOlMfqvkiEEfmwi2ZE+u3bkHv6kFAmg/xD8CGwMFCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4AACgkQZE+u3bkHv6krEQQAvx1yM0y9c8fbi3E+hSzKQCVU8/4qSYQBFOkXGV4hhpwSyO1AD3VOT3G6G6ZR96jVkVai7KRuVb2B92zaEwFlgBOiQnYUQKRwb9PKeRxJEVG11m0i17wujWmFrpWz3p9meDX85C0iJnff1saWuFUH8g83NzWZ0IqkCU1X3a+GL6G4jQRoP8Q/AQQAvRuSsgU+O+q073MUjZw5ci+nf/15VniBXhUTiVpyDj+zqz6Ck1NRTMYTWvqpuKT0riVWLNMT7yy1v/axJgckvW7WgfhaFKoQ9WYS2xs/mkoNhLmB8ihzetAeahJez/swjshJh8aHUFCGKHcv8qiJ77GU14qbr1Uuno8X2cLa1jUAEQEAAYi2BBgBCAAgFiEEBOlMfqvkiEEfmwi2ZE+u3bkHv6kFAmg/xD8CGwwACgkQZE+u3bkHv6k9LwP/aarY+nFFLsYJXzXLFmEvzQ8d/HhAfWfr95BDszXFUxBmYhGepCGwIpuR7IGkXTS2ydeQI4ICy00cfLR1UPSpGWDIs7x+fVO7JtDc9Rkej1gr4uocm7sBtypHFybpQeLeL+Wf86Yz2WnC7MALIdJok5jquLYsVVg1ElRu5AnFV9Y==qurY
-        SIGN_KEY_ID: 04E94C7EABE488411F9B08B6644FAEDDB907BFA9
-        SIGN_KEY_PASS: mitsumi0226
         MAVEN_USERNAME: sJOOzga8
         MAVEN_PASSWORD: 91zeTUpcmUjz/DaJaVTObaboCyfImTV1BY+tFJwRt4+i
