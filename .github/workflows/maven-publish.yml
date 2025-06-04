@@ -27,23 +27,14 @@ jobs:
         server-id: central
         server-username: MAVEN_USERNAME
         server-password: MAVEN_PASSWORD
-    - id: install-secret-key
-      name: Install gpg secret key
-      run: |
-        # Install gpg secret key
-        cat <(echo -e "${{ secrets.SECRET_KEY }}") | gpg --batch --import
-        # Verify gpg secret key
-        gpg --list-secret-keys --keyid-format LONG
+        gpg-private-key: ${{ secrets.GPG_SIGNING_KEY }}
+        gpg-passphrase: MAVEN_GPG_PASSPHRASE
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
     - name: Publish to GitHub Packages Apache Maven
-      run: |
-        mvn \
-          --no-transfer-progress \
-          --batch-mode \
-          -Dgpg.passphrase=${{ secrets.SECRET_PASSWORD }} \
-          clean deploy
+      run: mvn -P release --batch-mode deploy -DskipTests
       env:
-        MAVEN_USERNAME: sJOOzga8
-        MAVEN_PASSWORD: 91zeTUpcmUjz/DaJaVTObaboCyfImTV1BY+tFJwRt4+i
+        MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+        MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_SIGNING_KEY_PASSWORD }}
