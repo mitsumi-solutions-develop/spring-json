@@ -9,6 +9,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(staticName = "build")
 public class ObjectMapperFactory {
 
+    /**
+     * create ObjectMapper with default settings.
+     *
+     * <ul>
+     *     <li>JsonInclude.Include.NON_NULL</li>
+     *     <li>SerializationFeature.FAIL_ON_EMPTY_BEANS</li>
+     *     <li>SerializationFeature.WRITE_DATES_AS_TIMESTAMPS</li>
+     * </ul>
+     *
+     * @return ObjectMapper.
+     */
     public ObjectMapper create() {
         return new ObjectMapper()
             .setSerializationInclusion(JsonInclude.Include.NON_NULL)
