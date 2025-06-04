@@ -11,6 +11,11 @@ import org.springframework.context.annotation.Primary;
 @RequiredArgsConstructor
 public class JsonConfig {
 
+    /**
+     * create ObjectMapper.
+     *
+     * @return ObjectMapper.
+     */
     @Bean
     @Primary
     public ObjectMapper objectMapper() {
