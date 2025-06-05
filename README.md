@@ -5,7 +5,7 @@
 # supported
 
 - java version: 21
-- spring boot version: 3.4.4
+- spring boot version: 3.5.0
 # dependency
 
 ## maven
