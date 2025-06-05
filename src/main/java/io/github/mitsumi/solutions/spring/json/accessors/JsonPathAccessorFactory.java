@@ -2,9 +2,7 @@ package io.github.mitsumi.solutions.spring.json.accessors;
 
 import io.github.mitsumi.solutions.spring.json.accessors.impl.JsonPathAccessorImpl;
 import com.jayway.jsonpath.Configuration;
-import org.springframework.stereotype.Component;
 
-@Component
 public class JsonPathAccessorFactory {
 
     /**
