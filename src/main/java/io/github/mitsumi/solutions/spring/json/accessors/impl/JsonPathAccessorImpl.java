@@ -4,8 +4,11 @@ import io.github.mitsumi.solutions.spring.json.accessors.JsonPathAccessor;
 import com.jayway.jsonpath.JsonPath;
 import lombok.RequiredArgsConstructor;
 
+
 @RequiredArgsConstructor
+@SuppressWarnings("PMD.CommentRequired")
 public class JsonPathAccessorImpl implements JsonPathAccessor {
+
     private final Object document;
 
     /**
@@ -15,7 +18,8 @@ public class JsonPathAccessorImpl implements JsonPathAccessor {
      * @return value.
      * @param <T> type of value.
      */
-    public <T> T read(String jsonPath) {
+    @Override
+    public <T> T read(final String jsonPath) {
         return JsonPath.read(document, jsonPath);
     }
 }
