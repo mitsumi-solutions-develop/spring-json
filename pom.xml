@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.mitsumi-solutions-develop</groupId>
     <artifactId>spring-json</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.5</version>
     <packaging>jar</packaging>
     <name>spring-json</name>
     <description>spring json</description>
@@ -50,8 +50,7 @@
         <repository>
             <id>central</id>
             <name>Central Repository OSSRH</name>
-<!--            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
-            <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
     <dependencies>
