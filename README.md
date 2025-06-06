@@ -13,14 +13,14 @@
 <dependency>
     <groupId>io.github.mitsumi-solutions-develop</groupId>
     <artifactId>spring-json</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.6</version>
 </dependency>
 ```
 
 ## gradle
 
 ```
-implementation group: 'io.github.mitsumi-solutions-develop', name: 'spring-json', version: '1.0.7'
+implementation group: 'io.github.mitsumi-solutions-develop', name: 'spring-json', version: '1.0.6'
 ```
 
 # 背景
