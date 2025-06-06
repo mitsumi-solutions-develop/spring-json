@@ -14,9 +14,9 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class JsonTest {
+public class JsonsTest {
 
-    private final Json json = new Json();
+    private final Jsons jsons = new Jsons();
 
     private final JsonPathAccessorFactory jsonPathAccessorFactory = new JsonPathAccessorFactory();
 
@@ -24,18 +24,18 @@ public class JsonTest {
     @Test
     public void test_serialize_and_deserialize_success() {
         var user = user();
-        var jsonString = json.serialize(user);
-        var jsonPrettyString = json.serializePretty(user);
+        var jsonString = jsons.serialize(user);
+        var jsonPrettyString = jsons.serializePretty(user);
 
         assertSerialized(jsonString);
         assertSerialized(jsonPrettyString);
 
-        var actualUser = json.deserialize(jsonString, User.class);
+        var actualUser = jsons.deserialize(jsonString, User.class);
 
         assertDeserialized(actualUser, user);
 
-        var actualUsers = json.deserialize(
-            json.serialize(List.of(user)),
+        var actualUsers = jsons.deserialize(
+            jsons.serialize(List.of(user)),
             new TypeReference<List<User>>() {}
         );
 
@@ -47,7 +47,7 @@ public class JsonTest {
     public void test_deserialize_failure() {
         var actualThrows = Assertions.assertThrows(
             RuntimeException.class,
-            () -> json.deserialize("{\"name\":\"山田太郎\"\"age\":20}", User.class)
+            () -> jsons.deserialize("{\"name\":\"山田太郎\"\"age\":20}", User.class)
         );
 
         assertThat(actualThrows.getMessage(),  Matchers.is("Failed to deserialize."));

@@ -2,7 +2,14 @@ package io.github.mitsumi.solutions.spring.json.accessors;
 
 import io.github.mitsumi.solutions.spring.json.accessors.impl.JsonPathAccessorImpl;
 import com.jayway.jsonpath.Configuration;
+import lombok.NoArgsConstructor;
 
+/**
+ * JsonPathAccessorFactory.
+ *
+ * @author mitsumi.kaneyama
+ */
+@NoArgsConstructor
 public class JsonPathAccessorFactory {
 
     /**
@@ -10,8 +17,9 @@ public class JsonPathAccessorFactory {
      * @param json json string.
      * @return JsonPathAccessor.
      */
-    public JsonPathAccessor create(String json) {
-        var provider = Configuration.defaultConfiguration().jsonProvider();
+    @SuppressWarnings("PMD.UseExplicitTypes")
+    public JsonPathAccessor create(final String json) {
+        final var provider = Configuration.defaultConfiguration().jsonProvider();
 
         return new JsonPathAccessorImpl(provider.parse(json));
     }

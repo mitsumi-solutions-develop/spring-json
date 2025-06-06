@@ -6,7 +6,12 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.NoArgsConstructor;
 
+/**
+ *
+ * @author mitsumi.kaneyama
+ */
 @NoArgsConstructor(staticName = "build")
+@SuppressWarnings("PMD.CommentSize")
 public class ObjectMapperFactory {
 
     /**
@@ -17,7 +22,6 @@ public class ObjectMapperFactory {
      *     <li>SerializationFeature.FAIL_ON_EMPTY_BEANS</li>
      *     <li>SerializationFeature.WRITE_DATES_AS_TIMESTAMPS</li>
      * </ul>
-     *
      * @return ObjectMapper.
      */
     public ObjectMapper create() {

@@ -4,20 +4,29 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.mitsumi.solutions.spring.json.factories.ObjectMapperFactory;
+import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;
 import java.util.function.Supplier;
 
-public class Json {
+/**
+ * ObjectMapperをラッパーしたクラス.
+ *
+ * @author mitsumi.kaneyama
+ */
+@RequiredArgsConstructor
+public class Jsons {
 
+    /**
+     * ObjectMapper.
+     */
     private final ObjectMapper objectMapper;
 
-    public Json() {
+    /**
+     * default constructor.
+     */
+    public Jsons() {
         this(ObjectMapperFactory.build().create());
-    }
-
-    public Json(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
     }
 
     /**
@@ -27,8 +36,8 @@ public class Json {
      * @return json string.
      * @param <T> type of object.
      */
-    public <T> String serialize(T value) {
-        return serialize(value, () -> new RuntimeException("Failed to serialize."));
+    public <T> String serialize(final T value) {
+        return serialize(value, () -> new IllegalStateException("Failed to serialize."));
     }
 
     /**
@@ -37,11 +46,10 @@ public class Json {
      * @param value object to serialize.
      * @param exceptionSupplier exception supplier.
      * @return json string.
-     * @param <T> type of object.
-     * @param <X> type of exception.
      * @throws X exception.
      */
-    public <T, X extends Throwable> String serialize(T value, Supplier<X> exceptionSupplier) throws X {
+    public <T, X extends Throwable> String serialize(final T value,
+                                                     final Supplier<X> exceptionSupplier) throws X {
         try {
             return objectMapper.writeValueAsString(value);
         } catch (JsonProcessingException e) {
@@ -55,11 +63,11 @@ public class Json {
      * @return json string.
      * @param <T> type of object.
      */
-    public <T> String serializePretty(T value) {
+    public <T> String serializePretty(final T value) {
         try {
             return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(value);
         } catch (JsonProcessingException e) {
-            throw this.throwException(() -> new RuntimeException("Failed to serialize."), e);
+            throw this.throwException(() -> new IllegalStateException("Failed to serialize."), e);
         }
     }
 
@@ -71,23 +79,21 @@ public class Json {
      * @return deserialized object.
      * @param <T> type of object.
      */
-    public <T> T deserialize(String content, TypeReference<T> valueTypeRef) {
-        return deserialize(content, valueTypeRef, () -> new RuntimeException("Failed to deserialize."));
+    public <T> T deserialize(final String content, final TypeReference<T> valueTypeRef) {
+        return deserialize(content, valueTypeRef, () -> new IllegalStateException("Failed to deserialize."));
     }
 
     /**
      * deserialize a JSON string to an object.
-     *
      * @param content json string.
      * @param valueTypeRef type reference.
      * @param exceptionSupplier exception supplier.
      * @return deserialized object.
-     * @param <T> type of object.
-     * @param <X> type of exception.
      * @throws X exception.
      */
-    public <T, X extends Throwable> T deserialize(String content, TypeReference<T> valueTypeRef,
-                                                  Supplier<X> exceptionSupplier) throws X {
+    public <T, X extends Throwable> T deserialize(final String content,
+                                                  final TypeReference<T> valueTypeRef,
+                                                  final Supplier<X> exceptionSupplier) throws X {
         try {
             return objectMapper.readValue(content, valueTypeRef);
         } catch (IOException e) {
@@ -103,8 +109,8 @@ public class Json {
      * @return deserialized object.
      * @param <T> type of object.
      */
-    public <T> T deserialize(String content, Class<T> valueType) {
-        return deserialize(content, valueType, () -> new RuntimeException("Failed to deserialize."));
+    public <T> T deserialize(final String content, final Class<T> valueType) {
+        return deserialize(content, valueType, () -> new IllegalStateException("Failed to deserialize."));
     }
 
     /**
@@ -113,11 +119,11 @@ public class Json {
      * @param valueType type of object.
      * @param exceptionSupplier exception supplier.
      * @return deserialized object.
-     * @param <T> type of object.
-     * @param <X> type of exception.
      * @throws X exception.
      */
-    public <T, X extends Throwable> T deserialize(String content, Class<T> valueType, Supplier<X> exceptionSupplier)
+    public <T, X extends Throwable> T deserialize(final String content,
+                                                  final Class<T> valueType,
+                                                  final Supplier<X> exceptionSupplier)
         throws X {
         try {
             return objectMapper.readValue(content, valueType);
@@ -128,15 +134,15 @@ public class Json {
 
     /**
      * throw an exception.
-     *
      * @param exceptionSupplier exception supplier.
      * @param throwable throwable.
      * @return exception.
-     * @param <X> type of exception.
      * @throws X exception.
      */
-    private <X extends Throwable> X throwException(Supplier<X> exceptionSupplier, Throwable throwable) throws X {
-        var exception = exceptionSupplier.get();
+    @SuppressWarnings("PMD.UseExplicitTypes")
+    private <X extends Throwable> X throwException(final Supplier<X> exceptionSupplier,
+                                                   final Throwable throwable) throws X {
+        final var exception = exceptionSupplier.get();
         exception.addSuppressed(throwable);
         throw exception;
     }
