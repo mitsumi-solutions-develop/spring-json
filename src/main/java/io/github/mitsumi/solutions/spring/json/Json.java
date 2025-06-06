@@ -4,12 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.mitsumi.solutions.spring.json.factories.ObjectMapperFactory;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.function.Supplier;
 
-@Component
 public class Json {
 
     private final ObjectMapper objectMapper;

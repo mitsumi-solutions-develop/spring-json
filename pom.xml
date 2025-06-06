@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.mitsumi-solutions-develop</groupId>
     <artifactId>spring-json</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>spring-json</name>
     <description>spring json</description>
@@ -27,14 +27,6 @@
         </developer>
     </developers>
 
-    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-
     <scm>
         <connection>scm:git:git://github.com/mitsumi-solutions-develop/spring-json.git</connection>
         <developerConnection>scm:git:ssh://github.com:mitsumi-solutions-develop/spring-json.git</developerConnection>
@@ -47,29 +39,22 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jackson.version>2.18.3</jackson.version>
         <json-path.version>2.9.0</json-path.version>
+        <jackson-datatype.version>2.19.0</jackson-datatype.version>
         <junit.jupiter.version>5.12.2</junit.jupiter.version>
         <assertj.version>4.0.0-M1</assertj.version>
         <hamcrest.version>3.0</hamcrest.version>
+        <lombok.version>1.18.38</lombok.version>
+        <json-smart.version>2.5.2</json-smart.version>
     </properties>
     <distributionManagement>
         <repository>
             <id>central</id>
             <name>Central Repository OSSRH</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+<!--            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
+            <url>https://central.sonatype.com/repository/maven-snapshots/</url>
         </repository>
     </distributionManagement>
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-json -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-json</artifactId>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -81,11 +66,30 @@
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
             <version>${json-path.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>net.minidev</groupId>
+                    <artifactId>json-smart</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/net.minidev/json-smart -->
+        <dependency>
+            <groupId>net.minidev</groupId>
+            <artifactId>json-smart</artifactId>
+            <version>${json-smart.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson-datatype.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
+            <version>${lombok.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -114,9 +118,6 @@
         <resources>
             <resource>
                 <directory>${basedir}/src/main/resources</directory>
-            </resource>
-            <resource>
-                <directory>${basedir}/src/main/java</directory>
             </resource>
         </resources>
         <plugins>
@@ -175,6 +176,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <doclint>all,-missing</doclint>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
