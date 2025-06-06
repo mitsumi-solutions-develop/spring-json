@@ -1,5 +1,11 @@
 package io.github.mitsumi.solutions.spring.json.accessors;
 
+/**
+ * Read the specified JSON path.
+ *
+ * @author mitsumi.kaneyama
+ */
+@FunctionalInterface
 public interface JsonPathAccessor {
 
     /**

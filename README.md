@@ -1,11 +1,10 @@
 # spring-json
 
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white) ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white) [![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white) [![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)
 
 # supported
 
 - java version: 21
-- spring boot version: 3.5.0
 # dependency
 
 ## maven
@@ -14,14 +13,14 @@
 <dependency>
     <groupId>io.github.mitsumi-solutions-develop</groupId>
     <artifactId>spring-json</artifactId>
-    <version>${latest_version}</version>
+    <version>1.0.7</version>
 </dependency>
 ```
 
 ## gradle
 
 ```
-implementation group: 'io.github.mitsumi-solutions-develop', name: 'spring-json', version: '1.0.0'
+implementation group: 'io.github.mitsumi-solutions-develop', name: 'spring-json', version: '1.0.7'
 ```
 
 # 背景
