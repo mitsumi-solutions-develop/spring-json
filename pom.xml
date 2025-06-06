@@ -27,14 +27,6 @@
         </developer>
     </developers>
 
-    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-
     <scm>
         <connection>scm:git:git://github.com/mitsumi-solutions-develop/spring-json.git</connection>
         <developerConnection>scm:git:ssh://github.com:mitsumi-solutions-develop/spring-json.git</developerConnection>
@@ -61,12 +53,6 @@
         </repository>
     </distributionManagement>
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
