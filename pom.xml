@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.mitsumi-solutions-develop</groupId>
     <artifactId>spring-json</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <packaging>jar</packaging>
     <name>spring-json</name>
     <description>spring json</description>
@@ -209,7 +209,7 @@
                 <version>3.26.0</version>
                 <configuration>
                     <rulesets>
-                        <ruleset>${basedir}/pmd-rule-set.xml</ruleset>
+                        <ruleset>${basedir}/pmd/spring-json.xml</ruleset>
                     </rulesets>
                 </configuration>
             </plugin>
