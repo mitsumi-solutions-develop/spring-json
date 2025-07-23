@@ -139,7 +139,6 @@ public class Jsons {
      * @return exception.
      * @throws X exception.
      */
-    @SuppressWarnings("PMD.UseExplicitTypes")
     private <X extends Throwable> X throwException(final Supplier<X> exceptionSupplier,
                                                    final Throwable throwable) throws X {
         final var exception = exceptionSupplier.get();

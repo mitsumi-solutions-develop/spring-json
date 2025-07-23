@@ -17,7 +17,6 @@ public class JsonPathAccessorFactory {
      * @param json json string.
      * @return JsonPathAccessor.
      */
-    @SuppressWarnings("PMD.UseExplicitTypes")
     public JsonPathAccessor create(final String json) {
         final var provider = Configuration.defaultConfiguration().jsonProvider();
 

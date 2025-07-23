@@ -13,14 +13,14 @@
 <dependency>
     <groupId>io.github.mitsumi-solutions-develop</groupId>
     <artifactId>spring-json</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.8</version>
 </dependency>
 ```
 
 ## gradle
 
 ```
-implementation group: 'io.github.mitsumi-solutions-develop', name: 'spring-json', version: '1.0.6'
+implementation group: 'io.github.mitsumi-solutions-develop', name: 'spring-json', version: '1.0.8'
 ```
 
 # 背景
@@ -37,5 +37,7 @@ implementation group: 'io.github.mitsumi-solutions-develop', name: 'spring-json'
 defaultでは、以下の通りに、serializeする.
 
 - JsonInclude.Include.NON_NUL
-- SerializationFeature.FAIL_ON_EMPTY_BEANS
-- SerializationFeature.WRITE_DATES_AS_TIMESTAMPS
+- SerializationFeature.FAIL_ON_EMPTY_BEANS: false
+- SerializationFeature.WRITE_DATES_AS_TIMESTAMPS: false
+- DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES: false
+- DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES: false

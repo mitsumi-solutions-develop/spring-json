@@ -6,6 +6,8 @@ import io.github.mitsumi.solutions.spring.json.test.models.User;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -13,6 +15,7 @@ import java.time.ZoneOffset;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.nullValue;
 
 public class JsonsTest {
 
@@ -46,11 +49,21 @@ public class JsonsTest {
     @Test
     public void test_deserialize_failure() {
         var actualThrows = Assertions.assertThrows(
-            RuntimeException.class,
+            IllegalStateException.class,
             () -> jsons.deserialize("{\"name\":\"山田太郎\"\"age\":20}", User.class)
         );
 
         assertThat(actualThrows.getMessage(),  Matchers.is("Failed to deserialize."));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"{\"name\":\"山田太郎\", \"name_kana\":\"ヤマダ\", \"age\":20}",})
+    public void test_deserialize_unknown_property(String jsonString) {
+        var actual =  jsons.deserialize(jsonString, User.class);
+
+        assertThat(actual.name(), Matchers.is("山田太郎"));
+        assertThat(actual.age(), Matchers.is(20));
+        assertThat(actual.address(), nullValue());
     }
 
     private void assertSerialized(String jsonString) {
