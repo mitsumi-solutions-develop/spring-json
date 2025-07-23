@@ -39,3 +39,5 @@ defaultでは、以下の通りに、serializeする.
 - JsonInclude.Include.NON_NUL
 - SerializationFeature.FAIL_ON_EMPTY_BEANS: false
 - SerializationFeature.WRITE_DATES_AS_TIMESTAMPS: false
+- DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES: false
+- DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES: false
