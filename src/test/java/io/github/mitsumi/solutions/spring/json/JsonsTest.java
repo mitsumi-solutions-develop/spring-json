@@ -1,6 +1,5 @@
 package io.github.mitsumi.solutions.spring.json;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import io.github.mitsumi.solutions.spring.json.accessors.JsonPathAccessorFactory;
 import io.github.mitsumi.solutions.spring.json.test.models.User;
 import org.hamcrest.Matchers;
@@ -8,6 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import tools.jackson.core.type.TypeReference;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
