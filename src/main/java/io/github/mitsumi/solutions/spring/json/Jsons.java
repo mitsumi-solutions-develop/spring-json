@@ -1,12 +1,11 @@
 package io.github.mitsumi.solutions.spring.json;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.mitsumi.solutions.spring.json.factories.ObjectMapperFactory;
 import lombok.RequiredArgsConstructor;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
 
-import java.io.IOException;
 import java.util.function.Supplier;
 
 /**
@@ -52,7 +51,7 @@ public class Jsons {
                                                      final Supplier<X> exceptionSupplier) throws X {
         try {
             return objectMapper.writeValueAsString(value);
-        } catch (JsonProcessingException e) {
+        } catch (JacksonException e) {
             throw this.throwException(exceptionSupplier, e);
         }
     }
@@ -66,7 +65,7 @@ public class Jsons {
     public <T> String serializePretty(final T value) {
         try {
             return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(value);
-        } catch (JsonProcessingException e) {
+        } catch (JacksonException e) {
             throw this.throwException(() -> new IllegalStateException("Failed to serialize."), e);
         }
     }
@@ -96,7 +95,7 @@ public class Jsons {
                                                   final Supplier<X> exceptionSupplier) throws X {
         try {
             return objectMapper.readValue(content, valueTypeRef);
-        } catch (IOException e) {
+        } catch (JacksonException e) {
             throw this.throwException(exceptionSupplier, e);
         }
     }
@@ -123,11 +122,10 @@ public class Jsons {
      */
     public <T, X extends Throwable> T deserialize(final String content,
                                                   final Class<T> valueType,
-                                                  final Supplier<X> exceptionSupplier)
-        throws X {
+                                                  final Supplier<X> exceptionSupplier) throws X {
         try {
             return objectMapper.readValue(content, valueType);
-        } catch (IOException e) {
+        } catch (JacksonException e) {
             throw this.throwException(exceptionSupplier, e);
         }
     }
